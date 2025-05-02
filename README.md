@@ -89,7 +89,7 @@ services:
 ## 🛠 .env (Backend Example)
 
 ```
-DATABASE_URL=postgresql://greentree_owner:npg_ALS7oH9NDERd@ep-morning-paper-a54otb07-pooler.us-east-2.aws.neon.tech/glynac?sslmode=require
+DATABASE_URL=postgresql://<username>:pwd@server/db_name?sslmode=require
 ```
 
 ---
