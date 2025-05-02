@@ -5,12 +5,12 @@
 
 - **Frontend**: Next.js (React-based)
 - **Backend**: Django (REST API)
-- **Database**: External PostgreSQL
-- **CI/CD Options**: GitHub Actions (primary), GitLab CI/CD, Jenkins
+- **Database**: Azure PostgreSQL
+- **CI/CD**: GitHub Actions (Primary), GitLab CI/CD, Jenkins
 - **Containerization**: Docker
 - **Artifact Repository**: JFrog Artifactory / Nexus
 - **Code Quality**: SonarQube
-- **Deployment**: Docker Compose on EC2 / VMs
+- **Deployment**: Docker Compose on Azure VM / AWS EC2
 
 ---
 
@@ -134,8 +134,13 @@ DATABASE_URL=postgresql://greentree_owner:npg_ALS7oH9NDERd@ep-morning-paper-a54o
 
 ---
 
-## 🚀 Deployment Instructions
+## 🚀 Deployment Options
 
+- **Option 1**: Docker Compose on **AWS EC2**
+- **Option 2**: Docker Compose on **Azure VM (Ubuntu)**
+
+
+AWS EC2 VM Deployment Steps:
 1. Launch EC2 (Ubuntu) with ports 22, 8000, 3000 open.
 2. SSH into the server.
 3. Pull images:
@@ -149,6 +154,19 @@ docker pull yourdockerhub/Extraction_app
 docker compose up -d
 ```
 
+Azure VM Deployment Steps:
+1. Create Ubuntu VM on Azure and open ports 22, 8000, 3000.
+2. SSH into VM and install Docker, Docker Compose.
+3. Pull Docker images from Docker Hub:
+   ```bash
+   docker pull yourdockerhub/glynac-backend
+   docker pull yourdockerhub/glynac-frontend
+   ```
+4. Setup `.env` and `docker-compose.yml`, then run:
+   ```bash
+   docker compose up -d
+   ```
+
 ---
 
 ## 📈 Monitoring & Logging
@@ -158,11 +176,28 @@ docker compose up -d
 
 ---
 
+## 🔐 Future Plans
+
+### 🔒 Security & Secrets Management
+- Use **Azure Key Vault** or **AWS Secrets Manager** for managing DB credentials, API keys.
+- Store only environment-safe data in `.env` during local development.
+
+### ✅ Quality Gates
+- Integrate **SonarQube** for static code analysis and test coverage.
+- Extend pipeline to block merges on low quality score.
+
+### 📊 Observability (Optional Enhancements)
+- Add **Grafana + Prometheus** for container resource monitoring.
+- Use **ELK Stack** or **Fluentd** for centralized logging.
+
+---
+
 ## ✅ Summary
 
 Now we have a full DevOps pipeline that supports:
 - Separate repositories for frontend and backend
 - Clean CI/CD integration with GitHub Actions, GitLab, or Jenkins
 - Secure remote PostgreSQL usage
-- Docker Compose for lightweight orchestration
+- Docker Compose for lightweight orchestration and deployment in cloud.
+- Artifact storage, quality checks, secrets management planned
 
